@@ -1,44 +1,38 @@
 let numberInputBtn = document.querySelector('#numberInputBtn');
+let numberInput = document.querySelector('#numberInput')
 let initialNumber;
 let numberArray;
 let listWithNumbers = document.querySelector('#listWithNumbers')
 
 
+// Generate random number for user to guess. I am using 20 numbers so I can get at least 5 that are not dublicate values
 
-// Generate random number for user to guess
+let randomNumber = [];
+for (let i = 0; i < 20; i++) {
+    randomNumber[i] = Math.floor(Math.random() * 10);
+}
 
-let numberToGuess = [1, 2, 3, 4, 5];
-let counter = {};
-let dublicateRandom = false;
-for (let i = 0; i < 5; i++) {
-    numberToGuess[i] = Math.floor(Math.random() * 10);
-    for (let j = 0; j < numberToGuess.length; i++) {
-        if (counter[numberToGuess[j]]) {
-            dublicateRandom = true;
-        }
-        counter[numberToGuess[j]] = true;
-    }
-    if (dublicateRandom) {
-        numberToGuess[i] = Math.floor(Math.random() * 10);
+// make second array and push all the unique values
+
+let temp = [];
+
+for (let i = 0; i < randomNumber.length; i++) {
+    if (temp.indexOf(randomNumber[i]) === -1) {
+        temp.push(randomNumber[i])
     }
 }
 
-
-console.log(numberToGuess)
-
-
-
-
-
-
-
-
-
-
+// Copy the first 5 unique values from the temporary array
+randomNumber = temp.slice(0, 5)
 
 // Triggering the new number gathering
 
 numberInputBtn.addEventListener('click', getNumber);
+numberInputBtn.addEventListener('keyup', function (element) {
+    if (element.keCode === 13) {
+        getNumber();
+    }
+});
 numberInputBtn.addEventListener('keyup', function (element) {
     if (element.keCode === 13) {
         getNumber();
