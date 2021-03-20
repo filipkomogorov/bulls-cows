@@ -1,9 +1,3 @@
-
-let guessedNumber;
-let numberArray;
-
-
-
 // Generate random number for user to guess. I am using 20 numbers so I can get at least 5 that are not dublicate values
 
 let randomNumber = [];
@@ -23,7 +17,6 @@ for (let i = 0; i < randomNumber.length; i++) {
 
 // Copy the first 5 unique values from the temporary array
 randomNumber = temp.slice(0, 5);
-console.log(randomNumber);
 
 // Triggering the new number gathering
 
@@ -39,7 +32,8 @@ numberInput.addEventListener('keyup', function (el) {
 // document.getElementById('elementId').value='';
 
 // getting each number input from user 
-
+let guessedNumber;
+let numberArray;
 function getNumber() {
     let listWithNumbers = document.querySelector('#listWithNumbers')
     guessedNumber = document.querySelector('#numberInput').value;
@@ -84,7 +78,8 @@ function checkResult() {
     let _temp = [];
     let bull = 0;
     let cow = 0;
-    let listWithResults = document.querySelector('#results');
+    let listWithResultsBulls = document.querySelector('#resultsBulls');
+    let listWithResultsCows = document.querySelector('#resultsCows');
 
     _temp = guessedNumber.split('').map(function (el) {
         return parseInt(el, 10);
@@ -99,12 +94,12 @@ function checkResult() {
         }
     }
     let currentBulls = document.createElement('li');
-    currentBulls.innerHTML = `Bulls: ${bull}`;
+    currentBulls.innerHTML = bull;
     let currentCows = document.createElement('li');
-    currentCows.innerHTML = `Cows: ${cow}`;
+    currentCows.innerHTML = cow;
 
-    listWithResults.appendChild(currentBulls);
-    listWithResults.appendChild(currentCows);
+    listWithResultsBulls.appendChild(currentBulls);
+    listWithResultsCows.appendChild(currentCows);
 
     if (currentBulls.innerHTML == 5) {
         alert('you won the game')
@@ -112,3 +107,23 @@ function checkResult() {
 
 }
 
+// New game button
+
+let newGameBtn = document.querySelector('#newGame');
+newGameBtn.addEventListener('click', function () {
+    window.location.reload();
+});
+
+// Rules button
+
+let rulesOpenBtn = document.querySelector('#rulesOpenBtn');
+let rules = document.querySelector('#rules');
+let rulesCloseBtn = document.querySelector('#rulesCloseBtn')
+
+rulesOpenBtn.addEventListener('click', function () {
+    rules.classList.toggle('hide');
+});
+
+rulesCloseBtn.addEventListener('click', function () {
+    rules.classList.toggle('hide');
+});

@@ -5,27 +5,36 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Filip's Bulls and Cows</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Chango&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script defer src="assets/js/script.js"></script>
 </head>
 
 <body>
 
     <header class="section__header">
-
+        <div class="section__header--title">
+            <h1>BULLS AND COWS</h1>
+        </div>
+        <div class="section__header--buttons">
+            <p id="newGame">New Game</p>
+            <p id="rulesOpenBtn">Read rules</p>
+        </div>
     </header>
 
     <section class="section__landing">
-        <h1>BULLS AND COWS</h1>
-        <h2>Lets play a game!</h2>
-        <div class="section__landing--initial-number">
-            <h3>Guess the computer's number</h3>
-            <input type="number" id="numberInput">
-            <input type="button" value="Guess" id="numberInputBtn">
-        </div>
+        <h2>Guess the computer's number</h2>
+        <input type="number" id="numberInput" pattern="/^-?\d+\.?\d*$/"
+            onKeyPress="if(this.value.length==5) return false;">
+        <!-- code inspired by https://stackoverflow.com/questions/18510845/maxlength-ignored-for-input-type-number-in-chrome -->
+        <input type="button" value="Guess" id="numberInputBtn">
+
     </section>
 
-    <section class="section__main-game">
+    <section class="section__scoreboard">
 
         <div class="score">
             <div class="score-title">
@@ -37,11 +46,28 @@
                 </ul>
             </div>
             <div class="score__results">
-                <p>Your results</p>
-                <ul id="results">
+                <h5 class="bulls">bulls</h5>
+                <ul id="resultsBulls">
+                </ul>
+                <h5 class="cows">cows</h5>
+                <ul id="resultsCows">
                 </ul>
             </div>
 
+        </div>
+    </section>
+
+    <section class="rules hide" id="rules">
+        <div class="rules__wrapper">
+            <span><i class="fas fa-times fa-3x" id="rulesCloseBtn"></i></span>
+            <h4>Rules for Bulls and Cows</h4>
+            <ul>
+                <li>Step 1: The computer generates random 5 digit number with unique values</li>
+                <li>Step 2: You enter 5 digit number to try and guess the computer number</li>
+                <li>Step 3: If you have a digit matching the exact position of the number to be guessed you receive a
+                    bull. If you have guessed a digit, but not on the correct possition, you receive a cow</li>
+                <li>Step 4: Combine numbers until you manage to guess the computer's number</li>
+            </ul>
         </div>
     </section>
 
